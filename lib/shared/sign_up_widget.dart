@@ -13,6 +13,7 @@ class SignUpWidget extends StatefulWidget {
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> {
+  late bool isBlind;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +51,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 ),
                 onPressed: (){
                   final provider = Provider.of<GoogleSignInProvider>(context,listen:false);
-                  provider.googleLogin();
+                  provider.googleLogin(isBlind);
                 },
                 icon: Icon(
                   FontAwesomeIcons.google,
@@ -61,6 +62,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
+              SizedBox(height:16.0,),
+              ElevatedButton(onPressed: (){isBlind=true;}, child: Text('Blind')),
+              ElevatedButton(onPressed: (){isBlind=false;}, child: Text('Volunteer')),
             ],
           ),
         ),
