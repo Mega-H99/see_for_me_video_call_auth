@@ -64,9 +64,9 @@ class _CallScreenVolunteerState extends State<CallScreenVolunteer> {
   }
 
   void _initSocketConnection() {
-    //ws://ad30-41-234-2-218.ngrok.io/
     socket = io(
       'http://localhost:5000',
+     // 'http://3264-41-233-95-226.ngrok.io ',
       OptionBuilder().setTransports(['websocket']) // for Flutter or Dart VM
           .build(),
     ).open();
@@ -135,6 +135,7 @@ class _CallScreenVolunteerState extends State<CallScreenVolunteer> {
               ],
             ),
             barrierDismissible: false,
+
           );
         }
       });
@@ -271,7 +272,9 @@ class _CallScreenVolunteerState extends State<CallScreenVolunteer> {
           !_localStream!.getAudioTracks()[0].enabled;
     }
     muted = isMuted ? Icons.mic_off : Icons.mic;
-    setState(() {});
+    setState(() {
+      print("Toggle Mute");
+    });
   }
 
   void _deafen() {
@@ -335,14 +338,13 @@ class _CallScreenVolunteerState extends State<CallScreenVolunteer> {
   }
 
   void _smallDispose() {
-    setState(() {});
-    dispose();
     isBusy = false;
-    initState();
-    socket.emit('Volunteer: Close call');
+    changer = false;
+    _remoteRenderer.srcObject= null;
     setState(() {});
 
-    //Navigator.pop(context);
+
+
   }
 
   SizedBox videoRenderers() => SizedBox(
@@ -444,6 +446,8 @@ class _CallScreenVolunteerState extends State<CallScreenVolunteer> {
               color: Colors.black,
               onPressed: () {
                 _smallDispose();
+                setState(() {
+                });
               },
               icon: Icon(
                 Icons.call_end,
@@ -476,6 +480,7 @@ class _CallScreenVolunteerState extends State<CallScreenVolunteer> {
               height: 20.0,
             ),
             volunteerProperties(),
+
           ],
         ))));
   }

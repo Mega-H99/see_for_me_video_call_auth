@@ -28,8 +28,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.3
   flutter_webrtc: ^0.7.1
-  hexcolor: ^2.0.5
-  permission_handler:
+  hexcolor: ^2.0.1
+  permission_handler: ^8.2.0
   sdp_transform: ^0.3.2
   socket_io_client: ^1.0.1
   conditional_builder_null_safety: ^0.0.6
@@ -42,7 +42,9 @@ dependencies:
   provider: ^5.0.0
   #for firebase & firestore
   firebase_core: ^1.10.6
-  cloud_firestore: ^3.1.5
+  cloud_firestore: ^2.5.4
+  #for text to speech
+  flutter_tts: ^3.3.3
 
 dev_dependencies:
   flutter_test:

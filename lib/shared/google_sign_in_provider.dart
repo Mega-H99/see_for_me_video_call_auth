@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import'package:google_sign_in/google_sign_in.dart';
+import 'package:webrtc_signaling_server/shared/components/constants.dart';
 
 class GoogleSignInProvider extends ChangeNotifier{
   final googleSignIn = GoogleSignIn();
@@ -9,6 +10,8 @@ class GoogleSignInProvider extends ChangeNotifier{
   GoogleSignInAccount? _user;
 
   GoogleSignInAccount get user => _user!;
+
+
 
   Future googleLogin(bool isBlind) async {
     try {
@@ -35,15 +38,23 @@ class GoogleSignInProvider extends ChangeNotifier{
           String email = auth.currentUser!.email.toString();
           String? phoneNumber = auth.currentUser!.phoneNumber.toString();
 
-          users.add(
-              {
-                'displayName': displayName,
-                'uid': uid,
-                'avatarURL': avatarURL,
-                'email':email,
-                'phoneNumber': phoneNumber,
-                'isBlind': isBlind,
-              });
+          users.doc('$uid').set({
+            'displayName': displayName,
+            'avatarURL': avatarURL,
+            'email':email,
+            'phoneNumber': phoneNumber,
+            'isBlind': isBlind,
+          });
+          // users.add(
+          //     {
+          //       'displayName': displayName,
+          //       'uid': uid,
+          //       'avatarURL': avatarURL,
+          //       'email':email,
+          //       'phoneNumber': phoneNumber,
+          //       'isBlind': isBlind,
+          //     });
+
 
         }
 
